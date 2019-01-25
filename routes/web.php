@@ -12,7 +12,12 @@
 */
 
 Route::get('/', 'RootController@index')->name('root');
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/category', 'CategoryController@index')->name('category');
+Route::get('/category/new', 'CategoryController@create')->name('new_category');
+Route::post('/category/new', 'CategoryController@store')->name('save_category');
+
+Route::get('/category/add/default', 'CategoryController@add_default')->name('add_default_categories');

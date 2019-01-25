@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $categories_available = Category::where('user_id', auth()->id())->count() > 0;
+
+        return view('home')->with('categories_available', $categories_available);
     }
 }
