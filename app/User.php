@@ -28,28 +28,20 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
-<<<<<<< HEAD
+
     public function budgets(){
       return $this->hasMany(Budget::class);
     }
 
-    public function categories()
-    {
-      return $this->hasMany(Category::class);
-=======
+
     public function categories()
     {
       return $this->hasMany(Category::class);
     }
 
-    public function budgets()
-    {
-      return $this->hasMany(Budget::class);
-    }
 
     public function debts()
     {
       return $this->hasMany(Debt::class);
->>>>>>> 13bf73c8067a7a6314176860978cb036ea77e464
     }
 }
