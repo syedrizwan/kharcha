@@ -19,6 +19,7 @@ class CreateBudgetsTable extends Migration
             $table->string('title');
             $table->date('from');
             $table->date('to');
+            $table->boolean('default')->default(false);
             $table->timestamps();
         });
     }

@@ -25,8 +25,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $categories_available = Category::where('user_id', auth()->id())->count() > 0;
+        if (Auth::User()->categories()->count() == 0 || Auth::User()->budgets()->count() == 0) {
+            return redirect('setup');
+        }
 
-        return view('home')->with('categories_available', $categories_available);
+        return view('home')->with(
+          ['title' => 'Dashboard',
+          'dashboard_menu' => 'active']
+        );
+    }
+
+    public function setup()
+    {
+        if (Auth::User()->categories()->count() > 0 && Auth::User()->budgets()->count() > 0) {
+            return redirect('setup');
+        }
+        
+        return view('setup')->with(
+        ['title' => 'Application Setup']
+      );
     }
 }
