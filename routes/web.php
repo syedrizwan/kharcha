@@ -15,7 +15,7 @@ Route::get('/', 'RootController@index')->name('root');
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/setup', 'HomeController@setup')->name('setup');
+Route::get('/verify/email', 'HomeController@verify_email')->name('verify_email');
 
 Route::get('/category', 'CategoryController@index')->name('category');
 Route::get('/category/new', 'CategoryController@create')->name('new_category');

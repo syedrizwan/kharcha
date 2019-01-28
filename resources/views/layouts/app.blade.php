@@ -183,7 +183,7 @@
     @if (Auth::user()->categories()->count() > 0 && Auth::user()->budgets()->count() > 0)
     @include('layouts.nav-bar')
     @endif
-    <div class="slim-mainpanel">
+    {{-- <div class="slim-mainpanel">
         <div class="container pd-t-10">
             @if (Auth::user()->email_verified_at == null)
             <div class="alert alert-danger" role="alert">
@@ -191,7 +191,7 @@
             </div>
             @endif
     </div>
-    </div>
+    </div> --}}
     @yield('content')
 
     <div class="slim-footer">

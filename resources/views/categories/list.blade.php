@@ -21,9 +21,9 @@
                         @if ($categories->count() > 0)
                         @foreach ($categories as $category)
                         <tr>
-                            <td class="tx-center"></td>
+                            <td class="tx-center">{{ $loop->iteration }}</td>
                             <td>{{ $category->title }}</td>
-                            <td class="valign-middle tx-right">{{ $category->created_at }}</td>
+                            <td class="valign-middle tx-right">{{ $category->created_at->diffForHumans() }}</td>
                             <td class="valign-middle tx-center">
                                 <a href="#" class="tx-gray-600 tx-24"><i class="icon ion-android-more-horizontal"></i></a>
                             </td>

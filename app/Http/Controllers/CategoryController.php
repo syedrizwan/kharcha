@@ -16,7 +16,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::where('user_id', auth()->id());
+        $categories = Auth::User()->categories()->where('deleted', false); // Category::where('user_id', auth()->id());
 
         return view('categories.list')->with(
           ['title' => 'Categories',
