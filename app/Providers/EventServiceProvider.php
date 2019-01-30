@@ -10,6 +10,7 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 use App\Listeners\SetDefaultValuesAndCreateSession;
+use App\Listeners\CreateUserSession;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,12 +22,13 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
-        Login::class => [
             SetDefaultValuesAndCreateSession::class,
         ],
+        Login::class => [
+            'App\Listeners\CreateUserSession@on_login',
+        ],
         Verified::class => [
-            \App\Listeners\RefreshUserSession::class,
+            CreateUserSession::class,
         ]
     ];
 

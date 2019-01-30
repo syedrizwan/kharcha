@@ -15,12 +15,12 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = session('user')->categories()->where('deleted', false); // Category::where('user_id', auth()->id());
+        $categories = session('user')->categories()->where('deleted', false)->paginate(10); // Category::where('user_id', auth()->id());
 
         return view('categories.list')->with(
           ['title' => 'Categories',
           'categories_menu' => 'active',
-          'categories' => $categories->get()]
+          'categories' => $categories]
         );
     }
 

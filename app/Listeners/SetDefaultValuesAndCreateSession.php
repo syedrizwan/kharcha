@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +32,7 @@ class SetDefaultValuesAndCreateSession
      * @param  Login  $event
      * @return void
      */
-    public function handle(Login $event)
+    public function handle(Registered $event)
     {
         // Create a default Budget
         $budget = new Budget();
