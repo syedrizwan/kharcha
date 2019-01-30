@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Category;
-use App\DefaultCategory;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -16,7 +15,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Auth::User()->categories()->where('deleted', false); // Category::where('user_id', auth()->id());
+        $categories = session('user')->categories()->where('deleted', false); // Category::where('user_id', auth()->id());
 
         return view('categories.list')->with(
           ['title' => 'Categories',
@@ -41,19 +40,5 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect('category');
-    }
-
-    public function add_default()
-    {
-        $dc = DefaultCategory::all();
-
-        foreach ($dc as $cat) {
-            $category = new Category();
-            $category->title = $cat->title;
-            $category->user_id = auth()->id();
-            $category->save();
-        }
-
-        return redirect('home');
     }
 }

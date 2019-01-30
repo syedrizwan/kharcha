@@ -20,5 +20,6 @@ Route::get('/verify/email', 'HomeController@verify_email')->name('verify_email')
 Route::get('/category', 'CategoryController@index')->name('category');
 Route::get('/category/new', 'CategoryController@create')->name('new_category');
 Route::post('/category/new', 'CategoryController@store')->name('save_category');
-
 Route::get('/category/add/default', 'CategoryController@add_default')->name('add_default_categories');
+
+Route::get('/setting/add/default', 'SettingController@add_default')->name('add_default_settings');

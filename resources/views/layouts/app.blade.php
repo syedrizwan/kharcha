@@ -33,12 +33,10 @@
         <div class="container">
             <div class="slim-header-left">
                 <h2 class="slim-logo"><a href="{{ asset('home') }}">kharcha<span>.</span></a></h2>
-                @if (Auth::User()->budgets()->count() > 0)
                 <div class="">
                     {{-- <input type="text" class="form-control" placeholder="Search">
             <button class="btn btn-primary"><i class="fa fa-search"></i></button> --}}
                 </div><!-- search-box -->
-                @endif
             </div><!-- slim-header-left -->
             <div class="slim-header-right">
                 {{-- <div class="dropdown dropdown-a">
@@ -157,8 +155,8 @@
           </div><!-- dropdown --> --}}
                 <div class="dropdown dropdown-c">
                     <a href="#" class="logged-user" data-toggle="dropdown">
-                        <img src="{{ asset(Auth::user()->profile_picture) }}" alt="">
-                        <span>{{ Auth::user()->name }}</span>
+                        <img src="{{ asset(session('user')->profile_picture) }}" alt="">
+                        <span>{{ session('user')->name }}</span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -180,18 +178,8 @@
         </div><!-- container -->
     </div><!-- slim-header -->
 
-    @if (Auth::user()->categories()->count() > 0 && Auth::user()->budgets()->count() > 0)
     @include('layouts.nav-bar')
-    @endif
-    {{-- <div class="slim-mainpanel">
-        <div class="container pd-t-10">
-            @if (Auth::user()->email_verified_at == null)
-            <div class="alert alert-danger" role="alert">
-                Your email is not verified. Please check your email and click the email verification link. <a href="{{ route('verification.resend') }}">Click here to request another verification link</a>
-            </div>
-            @endif
-    </div>
-    </div> --}}
+
     @yield('content')
 
     <div class="slim-footer">
@@ -200,6 +188,26 @@
         <p>Designed by: <a href="#">ThemePixels</a></p>
       </div><!-- container --> --}}
     </div><!-- slim-footer -->
+
+    <div id="emailNotVerifiedMessage" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content tx-size-sm">
+                <div class="modal-body tx-center pd-y-20 pd-x-20">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <i class="icon icon ion-ios-email-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                    <h4 class="tx-danger mg-b-20">Your email is not verified!</h4>
+                    <p class="mg-b-10 mg-x-20">You may experience an account lockout if you don't verify your email.</p>
+                    <p class="mg-b-20">If you haven't receive the verification email or the link is not working, please click 'Resent Verification Link' below.</p>
+                </div><!-- modal-body -->
+                <div class="modal-footer">
+                  <a href="{{ route('verification.resend') }}" class="btn btn-primary">Resent Verification Link</a>
+                    <button type="button" class="btn btn-danger pd-x-25" data-dismiss="modal" aria-label="Close">Continue</button>
+                  </div>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 
     <script src="{{ asset('lib/jquery/js/jquery.js') }}"></script>
     <script src="{{ asset('lib/popper.js/js/popper.js') }}"></script>
@@ -210,15 +218,18 @@
 
     <script src="{{ asset('js/slim.js') }}"></script>
     @yield('custom-script')
-    {{-- <script>
-        $(function(){
-      'use strict';
+    <script>
+        $(function() {
+            'use strict';
+            @if (session('user')->email_verified_at == null)
+            $('#emailNotVerifiedMessage').modal('show');
+            @endif
 
-      // $('.select2').select2({
-      //   minimumResultsForSearch: Infinity
-      // });
-    });
-    </script> --}}
+                // $('.select2').select2({
+                //   minimumResultsForSearch: Infinity
+                // });
+        });
+    </script>
 </body>
 
 </html>

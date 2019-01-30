@@ -5,20 +5,20 @@
     <div class="container pd-t-30">
         <div class="dash-headline-two">
             <div>
-                <h4 class="tx-inverse mg-b-5">Welcome, {{ Auth::user()->name }}!</h4>
+                <h4 class="tx-inverse mg-b-5">Welcome, {{ session('user')->name }}!</h4>
                 <p class="mg-b-0">You are viewing {{ Session::get('current_budget_title') }}</p>
             </div>
             <div class="d-h-t-right">
                 <div class="summary-item">
-                    <h1>{{ money_format('%n', $summary['actual_income']) }}</h1>
+                    <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_income'], 2) }}</h1>
                     <span>Income</span>
                 </div>
                 <div class="summary-item">
-                    <h1>{{ money_format('%n', $summary['actual_expense']) }}</h1>
+                    <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_expense'], 2) }}</h1>
                     <span>Expenses</span>
                 </div>
                 <div class="summary-item">
-                    <h1>{{ money_format('%n', $summary['actual_savings']) }}</h1>
+                    <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_savings'], 2) }}</h1>
                     <span>Savings</span>
                 </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="col">
                 <div class="card card-total">
                     <div>
-                        <h1>{{ money_format('%n', $summary['actual_income']) }}</h1>
+                        <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_income'], 2) }}</h1>
                         <p>Income</p>
                     </div>
                     <div>
@@ -41,7 +41,7 @@
             <div class="col">
                 <div class="card card-total">
                     <div>
-                        <h1>{{ money_format('%n', $summary['actual_expense']) }}</h1>
+                        <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_expense'], 2) }}</h1>
                         <p>Expenses</p>
                     </div>
                     <div>
@@ -55,7 +55,7 @@
             <div class="col">
                 <div class="card card-total">
                     <div>
-                        <h1 class="tx-gray-600">{{ money_format('%n', $summary['actual_savings']) }}</h1>
+                        <h1 class="tx-gray-600">{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_savings'], 2) }}</h1>
                         <p>Savings</p>
                     </div>
                     <div>
@@ -301,7 +301,7 @@ btn-primary btn-block">Categories</a>
 
         <div class="card-body">
             @auth
-            @if (Auth::user()->email_verified_at == null)
+            @if (session('user')->email_verified_at == null)
             <div class="alert alert-danger" role="alert">
                 Your email is not verified. Please check your email and click the email verification link.
             </div>

@@ -3,9 +3,13 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+
+use App\Listeners\SetDefaultValuesAndCreateSession;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        Login::class => [
+            SetDefaultValuesAndCreateSession::class,
+        ],
+        Verified::class => [
+            \App\Listeners\RefreshUserSession::class,
+        ]
     ];
 
     /**
