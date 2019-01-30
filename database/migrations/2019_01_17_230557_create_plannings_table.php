@@ -16,7 +16,8 @@ class CreatePlanningsTable extends Migration
         Schema::create('plannings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('budget_id');
-            $table->bigInteger('category_id');
+            $table->bigInteger('category_id')->nullable(); // for expense planning
+            $table->bigInteger('account_id')->nullable(); // for income planning
             $table->double('amount');
             $table->dateTime('remind_on');
             $table->timestamps();
