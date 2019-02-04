@@ -5,6 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Debt;
+use App\Budget;
+use App\Setting;
+use App\Account;
+use App\Category;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -16,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'profile_picture',
     ];
 
     /**
@@ -34,20 +39,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Budget::class);
     }
 
-
     public function categories()
     {
         return $this->hasMany(Category::class);
     }
-
 
     public function debts()
     {
         return $this->hasMany(Debt::class);
     }
 
-    public function Settings()
+    public function settings()
     {
         return $this->hasMany(Setting::class);
+    }
+
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
     }
 }

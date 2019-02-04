@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Planning;
-use App\Income;
 use App\Expense;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,9 +16,9 @@ class HomeController extends Controller
     public function index()
     {
         return view('home')->with(
-          ['title' => 'Dashboard',
-          'dashboard_menu' => 'active',
-          'summary' => $this->dashboard_counts()]
+          ['title' => 'Overview',
+          'overview_menu' => 'active',
+          'summary' => $this->overview_counts()]
         );
     }
 
@@ -33,17 +33,16 @@ class HomeController extends Controller
         );
     }
 
-    private function dashboard_counts()
+    private function overview_counts()
     {
         $counts = array();
 
-        $counts['planned_income'] = Planning::where(['budget_id' => session('current_budget_id'), 'category_id' => null])->sum('amount');
-        $counts['actual_income'] = Income::where('budget_id', session('current_budget_id'))->sum('amount');
-        $counts['planned_expense'] = Planning::where(['budget_id' => session('current_budget_id'), 'account_id' => null])->sum('amount');
-        $counts['actual_expense'] = Expense::where('budget_id', session('current_budget_id'))->sum('amount');
-        ;
-        $counts['planned_savings'] = $counts['planned_income'] - $counts['planned_expense'];
-        $counts['actual_savings'] = $counts['actual_income'] - $counts['actual_expense'];
+        // $counts['planned_income'] = Planning::where(['budget_id' => session('current_budget_id'), 'category_id' => null])->sum('amount');
+        // $counts['actual_income'] = Income::where('budget_id', session('current_budget_id'))->sum('amount');
+        // $counts['planned_expense'] = Planning::where(['budget_id' => session('current_budget_id'), 'account_id' => null])->sum('amount');
+        // $counts['actual_expense'] = Expense::where('budget_id', session('current_budget_id'))->sum('amount');
+        // $counts['planned_savings'] = $counts['planned_income'] - $counts['planned_expense'];
+        // $counts['actual_savings'] = $counts['actual_income'] - $counts['actual_expense'];
 
         return $counts;
     }

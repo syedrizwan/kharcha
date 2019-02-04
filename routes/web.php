@@ -23,3 +23,7 @@ Route::post('/category/new', 'CategoryController@store')->name('save_category');
 Route::get('/category/add/default', 'CategoryController@add_default')->name('add_default_categories');
 
 Route::get('/setting/add/default', 'SettingController@add_default')->name('add_default_settings');
+
+Route::get('/accounts', 'AccountController@index')->name('accounts');
+
+Route::get('/budget/set_current/{id}', 'BudgetController@set_current_budget')->name('budget.setCurrent');

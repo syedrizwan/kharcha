@@ -37,7 +37,7 @@ class SetDefaultValuesAndCreateSession
         // Create a default Budget
         $budget = new Budget();
         $budget->title = date('M') . '-' . date('Y') . ' Budget';
-        $budget->user_id = Auth::User()->id;
+        $budget->user_id = $event->user->id;
         $budget->default = true;
         $budget->from = new Carbon('first day of this month');
         $budget->to = new Carbon('last day of this month');
@@ -50,7 +50,8 @@ class SetDefaultValuesAndCreateSession
         foreach ($dc as $cat) {
             $category = new Category();
             $category->title = $cat->title;
-            $category->user_id = auth()->id();
+            $category->parent_id = $cat->parent_id;
+            $category->user_id = $event->user->id;
             $category->save();
         }
 
@@ -61,23 +62,23 @@ class SetDefaultValuesAndCreateSession
             $setting = new Setting();
             $setting->title = $set->title;
             $setting->value = $set->value;
-            $setting->user_id = auth()->id();
+            $setting->user_id = $event->user->id;
             $setting->save();
         }
 
         // Set the default budget as current
-        $current_budget = Auth::User()->budgets()->where('default', true)->first();
+        $current_budget = $event->user->budgets()->where('default', true)->first();
         session(['current_budget_id' => $current_budget->id]);
         session(['current_budget_title' => $current_budget->title]);
 
         // Get settings and set them in session
         $settings = array();
-        foreach (Auth::User()->settings()->get() as $setting) {
+        foreach ($event->user->settings()->get() as $setting) {
             $settings[$setting->title] = $setting->value;
         }
         session(['settings' => $settings]);
 
         // Get current user and set in session
-        session(['user' => Auth::User()]);
+        session(['user' => $event->user]);
     }
 }

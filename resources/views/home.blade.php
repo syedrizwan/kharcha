@@ -6,68 +6,28 @@
         <div class="dash-headline-two">
             <div>
                 <h4 class="tx-inverse mg-b-5">Welcome, {{ session('user')->name }}!</h4>
-                <p class="mg-b-0">You are viewing {{ Session::get('current_budget_title') }}</p>
+                <p class="mg-b-0">You are viewing {{ session('current_budget_title') }}</p>
             </div>
             <div class="d-h-t-right">
-                <div class="summary-item">
-                    <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_income'], 2) }}</h1>
-                    <span>Income</span>
-                </div>
-                <div class="summary-item">
-                    <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_expense'], 2) }}</h1>
-                    <span>Expenses</span>
-                </div>
-                <div class="summary-item">
-                    <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_savings'], 2) }}</h1>
-                    <span>Savings</span>
-                </div>
+                @if (session('user')->budgets->count() == 1)
+                  <button class="btn btn-outline-primary" type="button">
+                      {{ session('current_budget_title') }}
+                  </button>
+                @else
+                  <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ session('current_budget_title') }}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                      @foreach (session('user')->budgets as $budget)
+                        @if ($budget->id == session('current_budget_id'))
+                          @continue
+                        @endif
+                        <a onclick="block_ui()" class="dropdown-item" href="{{ route('budget.setCurrent', $budget->id) }}">{{ $budget->title }}</a>
+                      @endforeach
+                  </div><!-- dropdown-menu -->
+                @endif
             </div>
         </div><!-- dash-headline-two -->
-
-        <div class="row no-gutters dashboard-chart-one">
-            <div class="col">
-                <div class="card card-total">
-                    <div>
-                        <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_income'], 2) }}</h1>
-                        <p>Income</p>
-                    </div>
-                    <div>
-                        <div class="tx-24 mg-b-10 tx-center op-5">
-
-                        </div>
-                    </div>
-                </div><!-- card -->
-            </div><!-- col -->
-            <div class="col">
-                <div class="card card-total">
-                    <div>
-                        <h1>{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_expense'], 2) }}</h1>
-                        <p>Expenses</p>
-                    </div>
-                    <div>
-                        <div class="tx-16 mg-b-15 tx-center op-5">
-
-                        </div>
-
-                    </div>
-                </div><!-- card -->
-            </div><!-- col -->
-            <div class="col">
-                <div class="card card-total">
-                    <div>
-                        <h1 class="tx-gray-600">{{ Session::get('settings')['currency_symbol'] }}{{ number_format($summary['actual_savings'], 2) }}</h1>
-                        <p>Savings</p>
-                    </div>
-                    <div>
-                        <div class="tx-22 mg-b-10 tx-center op-5">
-
-                        </div>
-
-                    </div>
-                </div><!-- card -->
-            </div><!-- col -->
-
-        </div><!-- row -->
 
         <div class="nav-statistics-wrapper">
             <nav class="nav">
@@ -285,45 +245,6 @@
 
     </div><!-- container -->
 </div><!-- slim-mainpanel -->
-{{-- <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-2">
-          <div class="card">
-              <div class="card-body">
-                <a href="{{ route('category') }}" class="btn
-btn-primary btn-block">Categories</a>
-</div>
-</div>
-</div>
-<div class="col-md-10">
-    <div class="card">
-        <div class="card-header">Dashboard</div>
-
-        <div class="card-body">
-            @auth
-            @if (session('user')->email_verified_at == null)
-            <div class="alert alert-danger" role="alert">
-                Your email is not verified. Please check your email and click the email verification link.
-            </div>
-            @endif
-            @endauth
-            @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-            @endif
-            @if (!$categories_available)
-            <div class="alert alert-danger" role="alert">
-                No Categories defined. <a href="{{ route('add_default_categories') }}">Click here</a> to add default categories.
-            </div>
-            @endif
-
-            You are logged in!
-        </div>
-    </div>
-</div>
-</div>
-</div> --}}
 @endsection
 @section('page-js')
 <script src="{{ asset('lib/d3/js/d3.js') }}"></script>

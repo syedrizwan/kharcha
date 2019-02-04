@@ -14,9 +14,10 @@ class CreateDefaultCategoriesTable extends Migration
     public function up()
     {
         Schema::create('default_categories', function (Blueprint $table) {
-          $table->bigIncrements('id');
-          $table->string('title');
-          $table->timestamps();
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->bigInteger('parent_id');
+            $table->timestamps();
         });
     }
 

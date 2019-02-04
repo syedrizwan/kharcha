@@ -19,13 +19,12 @@
     <link href="{{ asset('lib/Ionicons/css/ionicons.css') }}" rel="stylesheet">
     <link href="{{ asset('lib/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('lib/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lib/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/SpinKit/css/spinkit.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet">
     @yield('page-css')
 
     <!-- Slim CSS -->
     <link rel="stylesheet" href="{{asset('css/slim.css')}}">
-
-
 </head>
 
 <body class="dashboard-4">
@@ -34,125 +33,68 @@
             <div class="slim-header-left">
                 <h2 class="slim-logo"><a href="{{ asset('home') }}">kharcha<span>.</span></a></h2>
                 <div class="">
-                    {{-- <input type="text" class="form-control" placeholder="Search">
-            <button class="btn btn-primary"><i class="fa fa-search"></i></button> --}}
+
                 </div><!-- search-box -->
             </div><!-- slim-header-left -->
             <div class="slim-header-right">
-                {{-- <div class="dropdown dropdown-a">
-            <a href="#" class="header-notification" data-toggle="dropdown">
-              <i class="icon ion-ios-bolt-outline"></i>
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-menu-header">
-                <h6 class="dropdown-menu-title">Activity Logs</h6>
-                <div>
-                  <a href="#">Filter List</a>
-                  <a href="#">Settings</a>
-                </div>
-              </div><!-- dropdown-menu-header -->
-              <div class="dropdown-activity-list">
-                <div class="activity-label">Today, December 13, 2017</div>
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">10:15am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">Purchased christmas sale cloud storage</div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">9:48am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-danger"></span></div>
-                    <div class="col-8">Login failure</div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">7:29am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-warning"></span></div>
-                    <div class="col-8">(D:) Storage almost full</div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">3:21am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">1 item sold <strong>Christmas bundle</strong></div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-                <div class="activity-label">Yesterday, December 12, 2017</div>
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">6:57am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">Earn new badge <strong>Elite Author</strong></div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-              </div><!-- dropdown-activity-list -->
-              <div class="dropdown-list-footer">
-                <a href="page-activity.html"><i class="fa fa-angle-down"></i> Show All Activities</a>
-              </div>
-            </div><!-- dropdown-menu-right -->
-          </div><!-- dropdown --> --}}
-                {{-- <div class="dropdown dropdown-b">
-            <a href="#" class="header-notification" data-toggle="dropdown">
-              <i class="icon ion-ios-bell-outline"></i>
-              <span class="indicator"></span>
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-menu-header">
-                <h6 class="dropdown-menu-title">Notifications</h6>
-                <div>
-                  <a href="#">Mark All as Read</a>
-                  <a href="#">Settings</a>
-                </div>
-              </div><!-- dropdown-menu-header -->
-              <div class="dropdown-list">
-                <!-- loop starts here -->
-                <a href="#" class="dropdown-link">
-                  <div class="media">
-                    <img src="../img/img8.jpg" alt="">
-                    <div class="media-body">
-                      <p><strong>Suzzeth Bungaos</strong> tagged you and 18 others in a post.</p>
-                      <span>October 03, 2017 8:45am</span>
-                    </div>
-                  </div><!-- media -->
-                </a>
-                <!-- loop ends here -->
-                <a href="#" class="dropdown-link">
-                  <div class="media">
-                    <img src="../img/img9.jpg" alt="">
-                    <div class="media-body">
-                      <p><strong>Mellisa Brown</strong> appreciated your work <strong>The Social Network</strong></p>
-                      <span>October 02, 2017 12:44am</span>
-                    </div>
-                  </div><!-- media -->
-                </a>
-                <a href="#" class="dropdown-link read">
-                  <div class="media">
-                    <img src="../img/img10.jpg" alt="">
-                    <div class="media-body">
-                      <p>20+ new items added are for sale in your <strong>Sale Group</strong></p>
-                      <span>October 01, 2017 10:20pm</span>
-                    </div>
-                  </div><!-- media -->
-                </a>
-                <a href="#" class="dropdown-link read">
-                  <div class="media">
-                    <img src="../img/img2.jpg" alt="">
-                    <div class="media-body">
-                      <p><strong>Julius Erving</strong> wants to connect with you on your conversation with <strong>Ronnie Mara</strong></p>
-                      <span>October 01, 2017 6:08pm</span>
-                    </div>
-                  </div><!-- media -->
-                </a>
-                <div class="dropdown-list-footer">
-                  <a href="page-notifications.html"><i class="fa fa-angle-down"></i> Show All Notifications</a>
-                </div>
-              </div><!-- dropdown-list -->
-            </div><!-- dropdown-menu-right -->
-          </div><!-- dropdown --> --}}
+                <div class="dropdown dropdown-b">
+                    <a href="#" class="header-notification" data-toggle="dropdown">
+                        <i class="icon ion-ios-bell-outline"></i>
+                        <span class="indicator"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-header">
+                            <h6 class="dropdown-menu-title">Notifications</h6>
+                            <div>
+                                <a href="#">Mark All as Read</a>
+                                <a href="#">Settings</a>
+                            </div>
+                        </div><!-- dropdown-menu-header -->
+                        <div class="dropdown-list">
+                            <!-- loop starts here -->
+                            <a href="#" class="dropdown-link">
+                                <div class="media">
+                                    <img src="../img/img8.jpg" alt="">
+                                    <div class="media-body">
+                                        <p><strong>Suzzeth Bungaos</strong> tagged you and 18 others in a post.</p>
+                                        <span>October 03, 2017 8:45am</span>
+                                    </div>
+                                </div><!-- media -->
+                            </a>
+                            <!-- loop ends here -->
+                            <a href="#" class="dropdown-link">
+                                <div class="media">
+                                    <img src="../img/img9.jpg" alt="">
+                                    <div class="media-body">
+                                        <p><strong>Mellisa Brown</strong> appreciated your work <strong>The Social Network</strong></p>
+                                        <span>October 02, 2017 12:44am</span>
+                                    </div>
+                                </div><!-- media -->
+                            </a>
+                            <a href="#" class="dropdown-link read">
+                                <div class="media">
+                                    <img src="../img/img10.jpg" alt="">
+                                    <div class="media-body">
+                                        <p>20+ new items added are for sale in your <strong>Sale Group</strong></p>
+                                        <span>October 01, 2017 10:20pm</span>
+                                    </div>
+                                </div><!-- media -->
+                            </a>
+                            <a href="#" class="dropdown-link read">
+                                <div class="media">
+                                    <img src="../img/img2.jpg" alt="">
+                                    <div class="media-body">
+                                        <p><strong>Julius Erving</strong> wants to connect with you on your conversation with <strong>Ronnie Mara</strong></p>
+                                        <span>October 01, 2017 6:08pm</span>
+                                    </div>
+                                </div><!-- media -->
+                            </a>
+                            <div class="dropdown-list-footer">
+                                <a href="page-notifications.html"><i class="fa fa-angle-down"></i> Show All Notifications</a>
+                            </div>
+                        </div><!-- dropdown-list -->
+                    </div><!-- dropdown-menu-right -->
+                </div><!-- dropdown -->
                 <div class="dropdown dropdown-c">
                     <a href="#" class="logged-user" data-toggle="dropdown">
                         <img src="{{ asset(session('user')->profile_picture) }}" alt="">
@@ -182,7 +124,7 @@
 
     @yield('content')
 
-    <div class="slim-footer">
+    <div class="slim-footer bd-0">
         {{-- <div class="container">
         <p>Copyright 2019 &copy; All Rights Reserved.</p>
         <p>Designed by: <a href="#">ThemePixels</a></p>
@@ -202,32 +144,53 @@
                     <p class="mg-b-20">If you haven't receive the verification email or the link is not working, please click 'Resent Verification Link' below.</p>
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                  <a href="{{ route('verification.resend') }}" class="btn btn-primary">Resent Verification Link</a>
+                    <a href="{{ route('verification.resend') }}" class="btn btn-primary">Resent Verification Link</a>
                     <button type="button" class="btn btn-danger pd-x-25" data-dismiss="modal" aria-label="Close">Continue</button>
-                  </div>
+                </div>
             </div><!-- modal-content -->
         </div><!-- modal-dialog -->
     </div><!-- modal -->
+
+    <div id="spinner" class="sk-chasing-dots" style="display: none">
+      <div class="sk-child sk-dot1"></div>
+      <div class="sk-child sk-dot2"></div>
+    </div>
 
     <script src="{{ asset('lib/jquery/js/jquery.js') }}"></script>
     <script src="{{ asset('lib/popper.js/js/popper.js') }}"></script>
     <script src="{{ asset('lib/bootstrap/js/bootstrap.js') }}"></script>
     <script src="{{ asset('lib/jquery.cookie/js/jquery.cookie.js') }}"></script>
-    <script src="{{ asset('lib/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('lib/block-ui/block-ui.min.js') }}"></script>
+    <script src="{{ asset('lib/selectize/js/standalone/selectize.js') }}"></script>
     @yield('page-js')
 
     <script src="{{ asset('js/slim.js') }}"></script>
     @yield('custom-script')
     <script>
+        function block_ui() {
+            $.blockUI({
+              message: $("#spinner"),
+                css: {
+                    border: 'none',
+                    padding: '15px',
+                    backgroundColor: '#fff',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: 1,
+                    color: '#fff'
+                },
+                overlayCSS: {
+                  backgroundColor: '#fff',
+               }
+            });
+        }
         $(function() {
             'use strict';
             @if (session('user')->email_verified_at == null)
             $('#emailNotVerifiedMessage').modal('show');
             @endif
 
-                // $('.select2').select2({
-                //   minimumResultsForSearch: Infinity
-                // });
+            $('select').selectize();
         });
     </script>
 </body>

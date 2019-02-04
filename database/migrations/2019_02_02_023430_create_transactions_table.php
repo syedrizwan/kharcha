@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->string('title');
-            $table->bigInteger('parent_id');
-            $table->boolean('deleted')->default(false);
+            $table->bigInteger('budget_id');
+            $table->bigInteger('category_id');
+            $table->bigInteger('account_id');
+            $table->string('description');
+            $table->double('amount');
+            $table->date('expense_date');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('transactions');
     }
 }

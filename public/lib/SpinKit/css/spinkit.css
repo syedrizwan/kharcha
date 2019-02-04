@@ -261,7 +261,7 @@
     display: inline-block;
     position: absolute;
     top: 0;
-    background-color: #333;
+    background-color: #5A6268; /*#333;*/
     border-radius: 100%;
     -webkit-animation: sk-chasingDotsBounce 2s infinite ease-in-out;
             animation: sk-chasingDotsBounce 2s infinite ease-in-out; }
