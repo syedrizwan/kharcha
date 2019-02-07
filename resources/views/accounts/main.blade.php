@@ -14,29 +14,49 @@
         <div class="row">
             @if ($accounts->count() > 0)
             @foreach ($accounts as $account)
-            <div class="col-md-3">
+            <div class="col-md-10">
+                <div class="list-group">
+                    <div class="list-group-item pd-y-20">
+                        <div class="media">
+                            <div class="d-flex mg-r-10 wd-50">
+                                {{-- <i class="fa fa-file-text-o tx-primary tx-40 tx"></i> --}}
+                                <img src="{{ asset($account->bank->logo) }}" alt="">
+                            </div><!-- d-flex -->
+                            <div class="media-body">
+                                <h6 class="tx-inverse">{{ $account->bank->title }} ({{ $account->type == 0 ? 'Debit' : 'Credit' }})</h6>
+                                <p class="mg-b-0">{{ $account->title }}</p>
+                            </div><!-- media-body -->
+                            <div class="pull-right">
+                                <span class="tx-40">{{ session('settings')['currency_symbol'] }}{{ $account->get_balance() }}</span>
+                            </div>
+                        </div><!-- media -->
+                    </div><!-- list-group-item -->
+                </div>
+            </div>
+
+            {{-- <div class="col-md-3">
                 <div class="card card-profile">
                     <div class="card-body">
                         <a href="#"><img src="{{ asset($account->bank->logo) }}" alt=""></a>
-                        <h4 class="profile-name">{{ $account->bank->title }}</h4>
-                        <p class="mg-b-20">
-                            {{ $account->title }}
-                            @if ($account->account_number != '')
-                            - x{{ substr($account->account_number, -4) }}
-                            @endif
-                        </p>
-                        <p class="">
-                            <a href="#" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
-                        </p>
-                        {{-- <a href="#" class="btn btn-outline-primary btn-sm btn-block">Follow</a> --}}
-                    </div><!-- card-body -->
-                </div>
-            </div>
-            @endforeach
-            @endif
-        </div>
-    </div><!-- container -->
+            <h4 class="profile-name">{{ $account->bank->title }}</h4>
+            <p class="mg-b-20">
+                {{ $account->title }}
+                @if ($account->account_number != '')
+                - x{{ substr($account->account_number, -4) }}
+                @endif
+            </p>
+            <p class="">
+                <a href="#" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
+            </p>
+            {{-- <a href="#" class="btn btn-outline-primary btn-sm btn-block">Follow</a> 
+        </div><!-- card-body -->
+    </div>
+</div> --}}
+@endforeach
+@endif
+</div>
+</div><!-- container -->
 </div><!-- slim-mainpanel -->
 
 <div id="accountForm" class="modal fade">
@@ -99,7 +119,7 @@
 </div><!-- modal -->
 @endsection
 @section('page-js')
-  <script src="{{ asset('lib/parsleyjs/js/parsley.js') }}"></script>
+<script src="{{ asset('lib/parsleyjs/js/parsley.js') }}"></script>
 @endsection
 @section('custom-script')
 <script>

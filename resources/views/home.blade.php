@@ -5,8 +5,9 @@
     <div class="container pd-t-30">
         <div class="dash-headline-two">
             <div>
+              {{-- <h4 class="tx-inverse mg-b-5">Welcome, {{ session('user')->name }}!</h4> --}}
                 <h4 class="tx-inverse mg-b-5">Welcome, {{ session('user')->name }}!</h4>
-                <p class="mg-b-0">You are viewing {{ session('current_budget_title') }}</p>
+                {{-- <p class="mg-b-0">You are viewing {{ session('current_budget_title') }}</p> --}}
             </div>
             <div class="d-h-t-right">
                 @if (session('user')->budgets->count() == 1)
