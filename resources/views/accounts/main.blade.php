@@ -11,10 +11,11 @@
             </ol>
             <h6 class="slim-pagetitle">{{ $title }}</h6>
         </div>
+        @include('layouts.error')
         <div class="row">
             @if ($accounts->count() > 0)
             @foreach ($accounts as $account)
-            <div class="col-md-10">
+            <div class="col-md-5 mg-b-30">
                 <div class="list-group">
                     <div class="list-group-item pd-y-20">
                         <div class="media">
@@ -33,39 +34,19 @@
                     </div><!-- list-group-item -->
                 </div>
             </div>
-
-            {{-- <div class="col-md-3">
-                <div class="card card-profile">
-                    <div class="card-body">
-                        <a href="#"><img src="{{ asset($account->bank->logo) }}" alt=""></a>
-            <h4 class="profile-name">{{ $account->bank->title }}</h4>
-            <p class="mg-b-20">
-                {{ $account->title }}
-                @if ($account->account_number != '')
-                - x{{ substr($account->account_number, -4) }}
-                @endif
-            </p>
-            <p class="">
-                <a href="#" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
-                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
-            </p>
-            {{-- <a href="#" class="btn btn-outline-primary btn-sm btn-block">Follow</a> 
-        </div><!-- card-body -->
-    </div>
-</div> --}}
-@endforeach
-@endif
-</div>
-</div><!-- container -->
+            @endforeach
+            @endif
+        </div>
+    </div><!-- container -->
 </div><!-- slim-mainpanel -->
 
 <div id="accountForm" class="modal fade">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content tx-size-sm">
-            <form class="" action="index.html" method="post">
-
+            <form class="" action="{{ route('accounts.add') }}" method="post">
+                @csrf
                 <div class="modal-header pd-y-20 pd-x-25">
-                    <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Message Preview</h6>
+                    <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Add new Account</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -74,18 +55,6 @@
                     <div class="row no-gutters">
                         <div class="form-layout">
                             <div class="row mg-b-25">
-                                <div class="col-lg-12">
-                                    <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">Which bank are you working with: </label>
-                                        <select class="form-control" data-placeholder="Choose bank" name="bank" required>
-                                            <option label="Choose bank"></option>
-                                            <option value="USA">United States of America</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="China">China</option>
-                                            <option value="Japan">Japan</option>
-                                        </select>
-                                    </div>
-                                </div><!-- col-12 -->
                                 <div class="col-lg-12">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">What whould you like to call this account: </label>
@@ -104,6 +73,36 @@
                                         <input class="form-control" type="text" name="routing_number" placeholder="Enter your account's routing number" required>
                                     </div>
                                 </div><!-- col-4 -->
+                                <div class="col-lg-6">
+                                    <div class="form-group mg-b-10-force">
+                                        <label class="form-control-label">Which bank are you working with: </label>
+                                        <select class="form-control" data-placeholder="Choose bank" name="bank" required>
+                                            <option label="Choose bank"></option>
+                                            @foreach ($banks as $bank)
+                                            <option value="{{ $bank->id }}">{{ $bank->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div><!-- col-12 -->
+                                <div class="col-lg-6">
+                                    <div class="form-group mg-b-10-force">
+                                        <label class="form-control-label">What is the account type: </label>
+                                        <div class="row mg-t-10">
+                                            <div class="col-lg-3">
+                                                <label class="rdiobox">
+                                                    <input name="type" type="radio" value="0" checked>
+                                                    <span>Debit</span>
+                                                </label>
+                                            </div><!-- col-3 -->
+                                            <div class="col-lg-3 mg-t-20 mg-lg-t-0">
+                                                <label class="rdiobox">
+                                                    <input name="type" type="radio" value="1">
+                                                    <span>Credit</span>
+                                                </label>
+                                            </div><!-- col-3 -->
+                                        </div>
+                                    </div>
+                                </div><!-- col-8 -->
                             </div><!-- row -->
                         </div><!-- form-layout -->
                     </div>

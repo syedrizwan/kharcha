@@ -25,5 +25,6 @@ Route::get('/category/add/default', 'CategoryController@add_default')->name('add
 Route::get('/setting/add/default', 'SettingController@add_default')->name('add_default_settings');
 
 Route::get('/accounts', 'AccountController@index')->name('accounts');
+Route::post('/accounts/add', 'AccountController@create')->name('accounts.add');
 
 Route::get('/budget/set_current/{id}', 'BudgetController@set_current_budget')->name('budget.setCurrent');
