@@ -32,7 +32,7 @@ class Account extends Model
 
     public function get_balance()
     {
-        // dd($income_id);
+        // TODO: fix following logic to add account with the information
         $income = $this->transactions()->whereIn('category_id', function ($query) {
             $income_id = session('user')->categories()->where('title', 'Income')->first()->id;
             $query->select('id')->from('categories')->where('parent_id', $income_id);

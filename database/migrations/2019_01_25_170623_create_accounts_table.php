@@ -20,7 +20,9 @@ class CreateAccountsTable extends Migration
             $table->string('title');
             $table->string('account_number')->nullable();
             $table->string('routing_number')->nullable();
-            $table->tinyInteger('type')->default(0); // 0 -> Debit, 1 -> Credit
+            $table->string('debit_card_number')->nullable();
+            $table->string('expiry')->nullable();
+            $table->string('security_code')->nullable();
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@
                                 <img src="{{ asset($account->bank->logo) }}" alt="">
                             </div><!-- d-flex -->
                             <div class="media-body">
-                                <h6 class="tx-inverse">{{ $account->bank->title }} ({{ $account->type == 0 ? 'Debit' : 'Credit' }})</h6>
+                                <h6 class="tx-inverse">{{ $account->bank->title }}</h6>
                                 <p class="mg-b-0">{{ $account->title }}</p>
                             </div><!-- media-body -->
                             <div class="pull-right">
@@ -57,52 +57,54 @@
                             <div class="row mg-b-25">
                                 <div class="col-lg-12">
                                     <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">What whould you like to call this account: </label>
-                                        <input class="form-control" type="text" name="title" placeholder="Enter account title" required>
+                                        <label class="form-control-label">What whould you like to call this account <span class="tx-danger">*</span> </label>
+                                        <input class="form-control" type="text" name="title" placeholder="Enter account title" required value="{{ old('title') }}">
                                     </div>
                                 </div><!-- col-8 -->
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Your account number (optional): </label>
-                                        <input class="form-control" type="text" name="account_number" placeholder="Enter your account number" required>
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Your routing number (optional): </label>
-                                        <input class="form-control" type="text" name="routing_number" placeholder="Enter your account's routing number" required>
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">Which bank are you working with: </label>
-                                        <select class="form-control" data-placeholder="Choose bank" name="bank" required>
+                                        <label class="form-control-label">Which bank are you working with <span class="tx-danger">*</span> </label>
+                                        <select class="form-control" data-placeholder="Choose bank" name="bank" id="bank" required>
                                             <option label="Choose bank"></option>
                                             @foreach ($banks as $bank)
                                             <option value="{{ $bank->id }}">{{ $bank->title }}</option>
                                             @endforeach
                                         </select>
+                                        <script>
+                                          $("#bank").val('{{ old('bank') }}')
+                                        </script>
                                     </div>
                                 </div><!-- col-12 -->
                                 <div class="col-lg-6">
-                                    <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">What is the account type: </label>
-                                        <div class="row mg-t-10">
-                                            <div class="col-lg-3">
-                                                <label class="rdiobox">
-                                                    <input name="type" type="radio" value="0" checked>
-                                                    <span>Debit</span>
-                                                </label>
-                                            </div><!-- col-3 -->
-                                            <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                                                <label class="rdiobox">
-                                                    <input name="type" type="radio" value="1">
-                                                    <span>Credit</span>
-                                                </label>
-                                            </div><!-- col-3 -->
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Account number </label>
+                                        <input class="form-control" type="text" name="account_number" value="{{ old('account_number') }}">
                                     </div>
-                                </div><!-- col-8 -->
+                                </div><!-- col-4 -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Routing number </label>
+                                        <input class="form-control" type="text" name="routing_number" value="{{ old('routing_number') }}">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Debit card number </label>
+                                        <input class="form-control" type="text" id="debitCardNumber" name="debit_card_number" placeholder="0000 0000 0000 0000" value="{{ old('debit_card_number') }}">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Expiry </label>
+                                        <input class="form-control" type="text" id="expiry" name="expiry" placeholder="MM/YYYY" value="{{ old('expiry') }}">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Security code </label>
+                                        <input class="form-control" type="text" id="securityCode" name="security_code" placeholder="000" value="{{ old('security_code') }}">
+                                    </div>
+                                </div><!-- col-4 -->
                             </div><!-- row -->
                         </div><!-- form-layout -->
                     </div>
@@ -119,6 +121,7 @@
 @endsection
 @section('page-js')
 <script src="{{ asset('lib/parsleyjs/js/parsley.js') }}"></script>
+<script src="{{ asset('lib/jquery.maskedinput/js/jquery.maskedinput.js') }}"></script>
 @endsection
 @section('custom-script')
 <script>
@@ -126,6 +129,10 @@
         'use strict';
 
         $('form').parsley();
+
+        $('#debitCardNumber').mask('9999 9999 9999 9999')
+        $('#expiry').mask('99/9999')
+        $('#securityCode').mask('999')
     });
 </script>
 @endsection

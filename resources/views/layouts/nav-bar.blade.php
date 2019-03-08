@@ -12,6 +12,11 @@
                 </a>
             </li>
             <li class="nav-item ">
+                <a class="nav-link" href="{{ route('accounts') }}">
+                    <span>Cards</span>
+                </a>
+            </li>
+            <li class="nav-item ">
                 <a class="nav-link" href="#">
                     <span>Budgets</span>
                 </a>
